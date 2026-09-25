@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pelican-s3-backup"
+version = "0.1.0"
+description = "Pelican plugin to back up the generated site to S3-compatible object storage."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = [
+    "pelican>=4.5",
+    "boto3>=1.26",
+]
+
+[project.optional-dependencies]
+test = ["pytest", "moto"]
+
+[tool.setuptools.packages.find]
+include = ["pelican_s3_backup*"]
