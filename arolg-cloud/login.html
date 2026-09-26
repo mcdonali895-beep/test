@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anmelden – AroLG Cloud</title>
+<meta name="description" content="Melde dich bei deinem AroLG Cloud Konto an.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: var(--grey); }
+  main.auth-main { min-height: calc(100vh - 300px); display: flex; align-items: center; justify-content: center; padding: 56px 20px; position: relative; overflow: hidden; }
+  .auth-deco { position: absolute; border: 2.5px solid var(--ink); border-radius: 18px; box-shadow: var(--shadow-sm); z-index: 0; }
+  .deco-1 { width: 190px; height: 120px; background: var(--yellow); top: 8%; left: 6%; transform: rotate(-8deg); }
+  .deco-2 { width: 160px; height: 100px; background: var(--flamingo); bottom: 10%; right: 8%; transform: rotate(6deg); }
+  @media (max-width: 900px) { .auth-deco { display: none; } }
+
+  .auth-card {
+    position: relative; z-index: 1; width: 100%; max-width: 440px; background: var(--white);
+    border: 2.5px solid var(--ink); border-radius: 22px; box-shadow: var(--shadow); padding: 40px 36px;
+  }
+  .auth-brand { display: flex; align-items: center; gap: 10px; font: 700 20px/1 var(--display); justify-content: center; margin-bottom: 22px; }
+  .auth-card h1 { font-size: 28px; text-align: center; }
+  .auth-sub { text-align: center; font-size: 15.5px; color: var(--ink-soft); margin-top: 8px; }
+
+  .field { display: flex; flex-direction: column; gap: 7px; margin-top: 20px; }
+  .field label { font: 700 14px/1 var(--body); }
+  .field input {
+    height: 48px; border: 2.5px solid var(--ink); border-radius: 12px; padding: 0 16px; font: 400 15.5px/1 var(--body);
+    background: var(--white); color: var(--ink);
+  }
+  .field input:focus { outline: 3px solid var(--blue); outline-offset: 1px; }
+  .field-row { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; font-size: 14px; }
+  .checky { display: flex; align-items: center; gap: 8px; }
+  .checky input { width: 18px; height: 18px; accent-color: var(--ink); }
+  .forgot { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .auth-card .btn { margin-top: 26px; }
+  .auth-divider { display: flex; align-items: center; gap: 12px; margin: 26px 0; color: var(--muted); font-size: 13px; }
+  .auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 2px; background: var(--line-soft); }
+  .auth-switch { text-align: center; font-size: 15px; color: var(--ink-soft); }
+  .auth-switch a { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; color: var(--ink); }
+  .form-msg { margin-top: 16px; font-size: 13.5px; text-align: center; color: var(--green-accent); font-weight: 700; display: none; }
+  .form-msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<header class="nav-outer">
+  <nav class="nav">
+    <a href="index.html#top" class="brand" aria-label="AroLG Cloud Startseite">
+      <svg class="brand-mark" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="#171717"/><path d="M10 23V15a5 5 0 0 1 5-5h9v8a5 5 0 0 1-5 5h-9z" fill="#FFE699"/></svg>
+      arolg.cloud
+    </a>
+    <div class="nav-links">
+      <a href="index.html#produkt">Produkt</a>
+      <a href="index.html#preise">Preise</a>
+      <a href="index.html#fuer-dich">Für dich</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-line">Anmelden</a>
+      <a href="register.html" class="btn btn-solid">Registrieren</a>
+    </div>
+  </nav>
+</header>
+
+<main class="auth-main">
+  <span class="auth-deco deco-1" aria-hidden="true"></span>
+  <span class="auth-deco deco-2" aria-hidden="true"></span>
+
+  <div class="auth-card">
+    <h1>Willkommen zurück</h1>
+    <p class="auth-sub">Melde dich an, um auf deine Buckets zuzugreifen.</p>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" placeholder="du@firma.de" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="password">Passwort</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+      </div>
+      <div class="field-row">
+        <label class="checky"><input type="checkbox" name="remember" id="remember">Angemeldet bleiben</label>
+        <a href="#" class="forgot">Passwort vergessen?</a>
+      </div>
+      <button type="submit" class="btn btn-solid btn-full">Anmelden</button>
+      <p class="form-msg" id="formMsg">Demo-Formular – es gibt noch kein echtes Backend.</p>
+    </form>
+
+    <div class="auth-divider">oder</div>
+    <p class="auth-switch">Noch kein Konto? <a href="register.html">Kostenlos registrieren</a></p>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="brand" style="font-size:22px">arolg.cloud</span>
+        <p>Dein Zuhause für Object Storage. Einfach, sicher und europäisch.</p>
+      </div>
+      <div class="foot-col"><h4>Produkt</h4><ul><li><a href="index.html#produkt">Object Storage</a></li><li><a href="index.html#produkt">Object Lock</a></li><li><a href="index.html#preise">Preise</a></li></ul></div>
+      <div class="foot-col"><h4>Für dich</h4><ul><li><a href="index.html#fuer-dich">Entwickler</a></li><li><a href="index.html#fuer-dich">Unternehmen</a></li><li><a href="index.html#fuer-dich">Freelancer</a></li></ul></div>
+      <div class="foot-col"><h4>Wer wir sind</h4><ul><li><a href="index.html#kontakt">Über uns</a></li><li><a href="index.html#kontakt">Kontakt</a></li></ul></div>
+      <div class="foot-col"><h4>Rechtliches</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="index.html#kontakt">Datenschutz</a></li><li><a href="index.html#kontakt">AGB</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 arolg.cloud</span>
+      <span class="status"><i></i>Alle Systeme betriebsbereit</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('loginForm');
+  var msg = document.getElementById('formMsg');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      msg.classList.add('show');
+    });
+  }
+})();
+</script>
+</body>
+</html>
