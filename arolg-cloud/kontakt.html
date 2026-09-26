@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kontakt – AroLG Cloud</title>
+<meta name="description" content="Schreib dem AroLG Cloud Team – wir antworten innerhalb von 4 Stunden.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: var(--grey); }
+  .kontakt-hero { padding-block: 48px 8px; }
+  .kontakt-hero h1 { font-size: clamp(32px, 5vw, 48px); margin-top: 14px; }
+  .kontakt-hero p { margin-top: 14px; font-size: 17.5px; color: var(--ink-soft); max-width: 46ch; }
+
+  .kontakt-shell { padding-block: 44px 76px; }
+  .kontakt-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; align-items: start; }
+  @media (max-width: 900px) { .kontakt-grid { grid-template-columns: 1fr; } }
+
+  .kchannels { display: flex; flex-direction: column; gap: 18px; }
+  .kchannel {
+    border: 2.5px solid var(--ink); border-radius: 18px; background: var(--white); padding: 22px;
+    display: flex; gap: 16px; box-shadow: var(--shadow-sm);
+  }
+  .kchannel:nth-child(2) { transform: rotate(-1deg); background: var(--yellow); }
+  .kchannel:nth-child(3) { transform: rotate(1deg); background: var(--blue); }
+  .kchannel-ico { width: 46px; height: 46px; border-radius: 12px; border: 2.5px solid var(--ink); background: var(--white); display: grid; place-items: center; flex: none; }
+  .kchannel-ico svg { width: 22px; height: 22px; }
+  .kchannel h3 { font-size: 17px; }
+  .kchannel p { font-size: 14.5px; color: var(--ink-soft); margin-top: 4px; line-height: 1.5; }
+  .kchannel a { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+
+  .kform {
+    border: 2.5px solid var(--ink); border-radius: 22px; background: var(--white); box-shadow: var(--shadow);
+    padding: 36px;
+  }
+  .kform h2 { font-size: 24px; margin-bottom: 4px; }
+  .kform .sub { font-size: 15px; color: var(--muted); }
+  .field { display: flex; flex-direction: column; gap: 7px; margin-top: 18px; }
+  .field-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field label { font: 700 14px/1 var(--body); }
+  .field input, .field select, .field textarea {
+    border: 2.5px solid var(--ink); border-radius: 12px; padding: 12px 16px; font: 400 15.5px/1.4 var(--body);
+    background: var(--white); color: var(--ink); width: 100%;
+  }
+  .field input { height: 48px; }
+  .field textarea { resize: vertical; min-height: 120px; font-family: var(--body); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .kform .btn { margin-top: 24px; }
+  .form-msg { margin-top: 16px; font-size: 13.5px; color: var(--green-accent); font-weight: 700; display: none; }
+  .form-msg.show { display: block; }
+  @media (max-width: 480px) { .field-pair { grid-template-columns: 1fr; } .kform { padding: 26px 22px; } }
+</style>
+</head>
+<body>
+
+<header class="nav-outer">
+  <nav class="nav">
+    <a href="index.html#top" class="brand" aria-label="AroLG Cloud Startseite">
+      <svg class="brand-mark" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="#171717"/><path d="M10 23V15a5 5 0 0 1 5-5h9v8a5 5 0 0 1-5 5h-9z" fill="#FFE699"/></svg>
+      arolg.cloud
+    </a>
+    <div class="nav-links">
+      <a href="index.html#produkt">Produkt</a>
+      <a href="index.html#preise">Preise</a>
+      <a href="index.html#fuer-dich">Für dich</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-line">Anmelden</a>
+      <a href="register.html" class="btn btn-solid">Registrieren</a>
+    </div>
+  </nav>
+</header>
+
+<section class="kontakt-hero">
+  <div class="wrap">
+    <span class="eyebrow">Kontakt</span>
+    <h1>Sag uns, wobei wir helfen können.</h1>
+    <p>Unser Support-Team sitzt in Frankfurt und antwortet werktags innerhalb von 4 Stunden.</p>
+  </div>
+</section>
+
+<section class="kontakt-shell">
+  <div class="wrap kontakt-grid">
+    <div class="kchannels">
+      <div class="kchannel">
+        <span class="kchannel-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="#171717" stroke-width="1.8" d="M4 5h16v14H4z"/><path stroke="#171717" stroke-width="1.8" d="m4 6 8 7 8-7"/></svg></span>
+        <div>
+          <h3>E-Mail-Support</h3>
+          <p>Für alle Fragen rund um dein Konto.<br><a href="mailto:support@arolg.cloud">support@arolg.cloud</a></p>
+        </div>
+      </div>
+      <div class="kchannel">
+        <span class="kchannel-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="#171717" stroke-width="1.8" d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/></svg></span>
+        <div>
+          <h3>Vertrieb &amp; Enterprise</h3>
+          <p>AV-Verträge, feste SLAs, Cross-Region-Setups.<br><a href="mailto:sales@arolg.cloud">sales@arolg.cloud</a></p>
+        </div>
+      </div>
+      <div class="kchannel">
+        <span class="kchannel-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="#171717" stroke-width="1.8"/><path stroke="#171717" stroke-width="1.8" stroke-linecap="round" d="M12 7v5l3.5 2"/></svg></span>
+        <div>
+          <h3>Erreichbarkeit</h3>
+          <p>Mo–Fr, 9–18 Uhr. Kritische Störungen 24/7 über die Statusseite.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="kform">
+      <h2>Schreib uns direkt</h2>
+      <p class="sub">Demo-Formular – es gibt noch kein echtes Backend.</p>
+      <form id="kontaktForm" novalidate>
+        <div class="field-pair">
+          <div class="field">
+            <label for="k-name">Name</label>
+            <input type="text" id="k-name" name="name" placeholder="Max Mustermann" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="k-email">E-Mail</label>
+            <input type="email" id="k-email" name="email" placeholder="du@firma.de" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="k-topic">Thema</label>
+          <select id="k-topic" name="topic">
+            <option>Allgemeine Frage</option>
+            <option>Technischer Support</option>
+            <option>Vertrieb &amp; Enterprise</option>
+            <option>Rechnung &amp; Abrechnung</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="k-message">Nachricht</label>
+          <textarea id="k-message" name="message" placeholder="Wie können wir helfen?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid btn-full">Nachricht senden</button>
+        <p class="form-msg" id="formMsg">Demo-Formular – es gibt noch kein echtes Backend.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="brand" style="font-size:22px">arolg.cloud</span>
+        <p>Dein Zuhause für Object Storage. Einfach, sicher und europäisch.</p>
+      </div>
+      <div class="foot-col"><h4>Produkt</h4><ul><li><a href="index.html#produkt">Object Storage</a></li><li><a href="index.html#produkt">Object Lock</a></li><li><a href="index.html#preise">Preise</a></li></ul></div>
+      <div class="foot-col"><h4>Für dich</h4><ul><li><a href="index.html#fuer-dich">Entwickler</a></li><li><a href="index.html#fuer-dich">Unternehmen</a></li><li><a href="index.html#fuer-dich">Freelancer</a></li></ul></div>
+      <div class="foot-col"><h4>Wer wir sind</h4><ul><li><a href="ueber-uns.html">Über uns</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></div>
+      <div class="foot-col"><h4>Rechtliches</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 arolg.cloud</span>
+      <span class="status"><i></i>Alle Systeme betriebsbereit</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('kontaktForm');
+  var msg = document.getElementById('formMsg');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      msg.classList.add('show');
+    });
+  }
+})();
+</script>
+</body>
+</html>

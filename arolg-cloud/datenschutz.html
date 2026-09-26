@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Impressum – AroLG Cloud</title>
-<meta name="description" content="Impressum und Anbieterkennzeichnung von AroLG Cloud.">
+<title>Datenschutzerklärung – AroLG Cloud</title>
+<meta name="description" content="Datenschutzerklärung von AroLG Cloud.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap">
@@ -21,17 +21,17 @@
     padding: 40px; max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 34px;
   }
   .legal-note {
-    background: var(--yellow); border: 2.5px solid var(--ink); border-radius: 14px; padding: 14px 18px;
+    background: var(--blue); border: 2.5px solid var(--ink); border-radius: 14px; padding: 14px 18px;
     font-size: 14.5px; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start;
   }
   .legal-note svg { width: 20px; height: 20px; flex: none; margin-top: 2px; }
   .legal-section h2 { font-size: 21px; margin-bottom: 12px; }
+  .legal-section h3 { font-size: 17px; margin: 16px 0 8px; }
   .legal-section p, .legal-section li { font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); }
-  .legal-section address { font-style: normal; }
   .legal-section ul { margin: 8px 0 0; padding-left: 20px; }
   .legal-section a { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; color: var(--ink); }
-  .legal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  @media (max-width: 640px) { .legal-grid { grid-template-columns: 1fr; } .legal-card { padding: 28px 22px; } }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; }
+  .toc a { border: 2px solid var(--ink); border-radius: 999px; padding: 7px 14px; font: 700 13.5px/1 var(--body); background: var(--grey); text-decoration: none !important; }
 </style>
 </head>
 <body>
@@ -58,8 +58,8 @@
 <section class="legal-hero">
   <div class="wrap">
     <span class="eyebrow">Rechtliches</span>
-    <h1>Impressum</h1>
-    <p>Angaben gemäß § 5 TMG und § 18 Abs. 2 MStV.</p>
+    <h1>Datenschutzerklärung</h1>
+    <p>Stand: September 2026. Diese Erklärung informiert dich, welche Daten wir verarbeiten und warum.</p>
   </div>
 </section>
 
@@ -68,59 +68,56 @@
     <div class="legal-card">
       <div class="legal-note">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#171717" stroke-width="1.8"/><path d="M12 8v5" stroke="#171717" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#171717"/></svg>
-        <span>Platzhalter-Angaben. Bitte vor Veröffentlichung durch die echten Unternehmensdaten ersetzen.</span>
+        <span>Platzhalter-Text zu Demonstrationszwecken. Bitte vor Veröffentlichung von einem Datenschutzbeauftragten prüfen und durch die echten Verarbeitungen ersetzen.</span>
+      </div>
+
+      <div class="legal-section toc">
+        <a href="#verantwortlicher">Verantwortlicher</a>
+        <a href="#erhebung">Datenerhebung</a>
+        <a href="#hosting">Hosting</a>
+        <a href="#cookies">Cookies</a>
+        <a href="#rechte">Deine Rechte</a>
+      </div>
+
+      <div class="legal-section" id="verantwortlicher">
+        <h2>1. Verantwortlicher</h2>
+        <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist die AroLG Cloud GmbH, Musterstraße 12, 60313 Frankfurt am Main. Kontakt: <a href="mailto:datenschutz@arolg.cloud">datenschutz@arolg.cloud</a>.</p>
+      </div>
+
+      <div class="legal-section" id="erhebung">
+        <h2>2. Welche Daten wir erheben</h2>
+        <p>Bei der Nutzung unserer Website und unseres Dienstes verarbeiten wir folgende Kategorien personenbezogener Daten:</p>
+        <ul>
+          <li>Kontodaten: Name, E-Mail-Adresse, Passwort-Hash bei der Registrierung.</li>
+          <li>Nutzungsdaten: Speicherverbrauch, API-Aufrufe, Log-Dateien zur Fehlerdiagnose.</li>
+          <li>Abrechnungsdaten: Rechnungsanschrift und Zahlungsinformationen über unseren Zahlungsdienstleister.</li>
+          <li>Server-Logs: IP-Adresse, Zeitstempel und aufgerufene Seite beim Besuch dieser Website.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="hosting">
+        <h2>3. Hosting und Serverstandort</h2>
+        <p>Unsere Infrastruktur und die von dir gespeicherten Objekte werden ausschließlich in Rechenzentren innerhalb Deutschlands betrieben. Eine Übermittlung in Länder außerhalb der EU/des EWR findet nicht statt.</p>
+      </div>
+
+      <div class="legal-section" id="cookies">
+        <h2>4. Cookies</h2>
+        <p>Wir setzen ausschließlich technisch notwendige Cookies ein, etwa zur Aufrechterhaltung deiner Anmeldesitzung. Diese Cookies erfordern nach § 25 Abs. 2 TTDSG keine gesonderte Einwilligung. Tracking- oder Marketing-Cookies verwenden wir nicht.</p>
       </div>
 
       <div class="legal-section">
-        <h2>Anbieter</h2>
-        <address>
-          AroLG Cloud GmbH<br>
-          Musterstraße 12<br>
-          60313 Frankfurt am Main<br>
-          Deutschland
-        </address>
+        <h2>5. Weitergabe an Dritte</h2>
+        <p>Eine Weitergabe deiner Daten an Dritte erfolgt nur, soweit dies zur Vertragserfüllung notwendig ist (z. B. Zahlungsdienstleister) oder eine gesetzliche Verpflichtung besteht. Mit allen Auftragsverarbeitern schließen wir Verträge nach Art. 28 DSGVO ab.</p>
       </div>
 
-      <div class="legal-grid">
-        <div class="legal-section">
-          <h2>Vertreten durch</h2>
-          <p>Geschäftsführer: Max Mustermann</p>
-        </div>
-        <div class="legal-section">
-          <h2>Kontakt</h2>
-          <p>Telefon: +49 69 123 456 78<br>E-Mail: <a href="mailto:kontakt@arolg.cloud">kontakt@arolg.cloud</a></p>
-        </div>
-      </div>
-
-      <div class="legal-grid">
-        <div class="legal-section">
-          <h2>Registereintrag</h2>
-          <p>Eintragung im Handelsregister.<br>Registergericht: Amtsgericht Frankfurt am Main<br>Registernummer: HRB 000000</p>
-        </div>
-        <div class="legal-section">
-          <h2>Umsatzsteuer-ID</h2>
-          <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br>DE000000000</p>
-        </div>
+      <div class="legal-section" id="rechte">
+        <h2>6. Deine Rechte</h2>
+        <p>Du hast jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung deiner Daten sowie das Recht auf Datenübertragbarkeit und Widerspruch. Wende dich hierzu an <a href="mailto:datenschutz@arolg.cloud">datenschutz@arolg.cloud</a>. Zudem steht dir ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde zu.</p>
       </div>
 
       <div class="legal-section">
-        <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
-        <p>Max Mustermann<br>Musterstraße 12, 60313 Frankfurt am Main</p>
-      </div>
-
-      <div class="legal-section">
-        <h2>EU-Streitschlichtung</h2>
-        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Unsere E-Mail-Adresse findest du oben im Impressum. Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-      </div>
-
-      <div class="legal-section">
-        <h2>Haftung für Inhalte</h2>
-        <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
-      </div>
-
-      <div class="legal-section">
-        <h2>Haftung für Links</h2>
-        <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p>
+        <h2>7. Speicherdauer</h2>
+        <p>Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungsfristen dies vorschreiben. Kontodaten werden nach Kündigung und Ablauf steuerrechtlicher Fristen gelöscht.</p>
       </div>
     </div>
   </div>
