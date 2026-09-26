@@ -4,519 +4,384 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AroLG Cloud</title>
-<meta name="description" content="AroLG Cloud – S3-kompatibler Object Storage aus Deutschland. Bausteine, die zusammenpassen, verwaltet über eine ruhige Konsole.">
+<meta name="description" content="AroLG Cloud – DSGVO-konformer S3-Object-Storage aus Deutschland. Ein Zuhause für deine Daten, ohne US-Cloud.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap">
 <style>
   :root {
     color-scheme: light;
-    --bg: #F3F1EC;
-    --surface: #FFFFFF;
-    --surface-soft: #F7F6F2;
-    --chip: #E9E6DF;
-    --line: #D6D2C8;
-    --line-soft: #ECE9E2;
-    --ink: #16181A;
-    --ink-soft: #3E4145;
-    --muted: #55585C;
-    --faint: #8C8980;
-    --accent: #FF7A45;
-    --accent-ink: #16181A;
-    --ok: #1F9D55;
-    --ok-soft: #E3F0E6;
-    --ok-bright: #3CC274;
-    --dark-bg: #16181A;
-    --dark-surface: #22252A;
-    --dark-line: #3A3D42;
+    --yellow: #FFE699;
+    --blue: #B8DFF0;
+    --green: #B6D8C0;
+    --green-accent: #3B9B58;
+    --green-accent-hover: #32854B;
+    --flamingo: #EFBEC5;
+    --grey: #F7F5F3;
+    --dark: #232323;
+    --dark-line: #3F3F3F;
     --dark-muted: #C9C6BE;
     --dark-faint: #8C8980;
-    --shadow: 0 30px 60px -30px rgba(22, 24, 26, .28);
-    --shadow-toast: 0 20px 40px -20px rgba(22, 24, 26, .5);
-    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --white: #FFFFFF;
+    --ink: #171717;
+    --ink-soft: #3E4038;
+    --muted: #5B5B54;
+    --line: #171717;
+    --line-soft: #DCD8CE;
+    --shadow: 0 18px 0 0 var(--ink);
+    --shadow-sm: 0 6px 0 0 var(--ink);
+    --display: "Baloo 2", "Segoe UI", system-ui, sans-serif;
+    --body: "Nunito", "Segoe UI", system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.5 var(--body); -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--white); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
-  a:hover { color: var(--muted); }
-  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-  h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1; letter-spacing: -.03em; text-wrap: balance; }
+  a:hover { opacity: .82; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; line-height: 1.05; text-wrap: balance; letter-spacing: -.01em; }
   p { margin: 0; }
-  .mono { font-family: var(--mono); }
 
-  .wrap { max-width: 1312px; margin: 0 auto; padding-inline: 24px; }
-  @media (max-width: 560px) { .wrap { padding-inline: 16px; } }
-
-  .eyebrow { font: 500 13px/1 var(--mono); letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
-  .eyebrow.on-dark { color: var(--dark-muted); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-inline: 32px; }
+  @media (max-width: 700px) { .wrap { padding-inline: 20px; } }
 
   .btn {
-    display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 12px 20px;
-    border-radius: 12px; font: 600 15px/1 var(--body); border: 1px solid transparent; cursor: pointer;
-    transition: transform .15s ease, background .15s ease, border-color .15s ease, opacity .15s ease;
+    display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 26px;
+    border-radius: 12px; font: 700 16px/1 var(--body); border: 2.5px solid var(--ink); cursor: pointer;
+    transition: transform .15s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+    box-shadow: var(--shadow-sm);
   }
-  .btn-solid { background: var(--ink); color: var(--bg); }
-  .btn-solid:hover { color: var(--bg); opacity: .88; transform: translateY(-1px); }
-  .btn-line { border-color: var(--ink); color: var(--ink); }
-  .btn-line:hover { color: var(--ink); background: var(--surface); }
-  .btn-text { padding: 12px 16px; color: var(--ink); font-weight: 500; }
-  .btn svg { width: 16px; height: 16px; flex: none; }
-
-  .check { display: flex; gap: 10px; align-items: center; font-size: 15px; }
-  .check svg { width: 16px; height: 16px; flex: none; }
+  .btn:hover { transform: translate(2px, 3px); box-shadow: 0 3px 0 0 var(--ink); }
+  .btn-solid { background: var(--ink); color: var(--white); }
+  .btn-solid:hover { background: #000; opacity: 1; color: var(--white); }
+  .btn-line { background: var(--white); color: var(--ink); }
+  .btn-line:hover { background: var(--yellow); opacity: 1; }
+  .btn-green { background: var(--green-accent); color: var(--white); border-color: var(--green-accent); box-shadow: 0 6px 0 0 #26663a; }
+  .btn-green:hover { background: var(--green-accent-hover); opacity: 1; box-shadow: 0 3px 0 0 #26663a; }
+  .btn svg { width: 17px; height: 17px; flex: none; }
 
   /* NAV */
-  header.nav {
-    display: flex; align-items: center; justify-content: space-between; gap: 24px;
-    padding: 18px 0; border-bottom: 1px solid var(--line);
-    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-    background: color-mix(in srgb, var(--bg) 90%, transparent);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  header.nav-outer { position: relative; z-index: 30; padding: 20px 20px 0; }
+  .nav {
+    max-width: 1180px; margin: 0 auto; background: var(--white); border: 2.5px solid var(--ink);
+    border-radius: 20px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 32px;
+    padding: 14px 24px; position: sticky; top: env(safe-area-inset-top, 12px);
   }
-  .nav-left { display: flex; align-items: center; gap: 48px; min-width: 0; }
-  .brand { display: flex; align-items: center; gap: 10px; font: 800 22px/1 var(--display); letter-spacing: -.03em; flex: none; }
-  .brand .dim { color: var(--muted); font-weight: 500; }
-  .nav-links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; }
-  .nav-right { display: flex; align-items: center; gap: 10px; flex: none; }
-  @media (max-width: 900px) { .nav-links { display: none; } .nav-left { gap: 0; } }
-  @media (max-width: 480px) { .nav-right .btn-text { display: none; } }
+  .brand { display: flex; align-items: center; gap: 10px; font: 700 22px/1 var(--display); flex: none; }
+  .brand-mark { width: 34px; height: 34px; flex: none; }
+  .nav-links { display: flex; gap: 26px; font: 700 15px/1 var(--body); flex: 1; }
+  .nav-links a { padding: 8px 10px; border-radius: 8px; }
+  .nav-links a:hover { background: var(--yellow); opacity: 1; }
+  .nav-cta { display: flex; align-items: center; gap: 10px; flex: none; }
+  .nav-cta .btn { height: 42px; padding: 0 18px; font-size: 14.5px; }
+  @media (max-width: 900px) { .nav-links { display: none; } }
+  @media (max-width: 480px) { .nav-cta .btn-line { display: none; } .nav { padding: 12px 16px; } }
 
   /* HERO */
-  .hero { padding-block: 72px 88px; }
-  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
-  .kicker { display: flex; align-items: center; gap: 10px; font: 500 13px/1 var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-  .kicker i { width: 8px; height: 8px; background: var(--accent); border-radius: 2px; flex: none; }
-  .hero-copy { display: flex; flex-direction: column; gap: 28px; }
-  .hero h1 { font-weight: 800; font-size: clamp(38px, 5.4vw, 80px); line-height: .98; }
-  .hero h1 mark { background: var(--accent); color: var(--ink); padding: 0 12px; border-radius: 12px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-  .hero-lede { max-width: 32em; font-size: 19px; line-height: 1.55; color: var(--ink-soft); }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .cmd {
-    display: flex; align-items: center; gap: 12px; width: fit-content; max-width: 100%;
-    padding: 6px 6px 6px 16px; background: var(--chip); border-radius: 10px; font: 400 14px/1 var(--mono);
+  section.hero { background: var(--yellow); border-bottom: 2.5px solid var(--ink); padding-block: 64px 88px; }
+  .hero-inner { max-width: 760px; }
+  .kicker { display: inline-flex; align-items: center; gap: 8px; font: 700 13px/1 var(--body); text-transform: uppercase; letter-spacing: .06em; background: var(--white); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px; }
+  .hero h1 { font-size: clamp(34px, 5.4vw, 58px); margin-top: 22px; }
+  .hero h1 em { font-style: normal; color: #0B4FA8; }
+  .hero-lede { margin-top: 20px; font-size: 19px; line-height: 1.55; color: var(--ink-soft); max-width: 34em; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+
+  /* Section shells */
+  section.block { padding-block: 68px; }
+  section.block.bordered { border-top: 2.5px solid var(--ink); }
+  .bg-grey { background: var(--grey); }
+  .bg-blue { background: var(--blue); }
+  .bg-green { background: var(--green); }
+  .bg-yellow { background: var(--yellow); }
+  .bg-dark { background: var(--dark); color: var(--white); }
+
+  .eyebrow { font: 800 13px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .center-head { max-width: 640px; margin: 0 auto 44px; text-align: center; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+  .center-head h2 { font-size: clamp(28px, 4vw, 42px); }
+  .center-head p { font-size: 18px; color: var(--ink-soft); }
+
+  /* Problem/solution split */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .split h2 { font-size: clamp(26px, 3.6vw, 38px); margin-bottom: 22px; }
+  .split h3 { font-size: 24px; margin: 22px 0 14px; }
+  .split p { font-size: 17.5px; line-height: 1.6; color: var(--ink-soft); }
+  .split p + p { margin-top: 14px; }
+  .split-visual {
+    border: 2.5px solid var(--ink); border-radius: 20px; background: var(--white); box-shadow: var(--shadow);
+    padding: 26px; display: flex; flex-direction: column; gap: 14px;
   }
-  .cmd span.p { color: var(--muted); }
-  .cmd button { width: 36px; height: 36px; flex: none; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: var(--bg); color: var(--ink); cursor: pointer; }
-  .cmd button:hover { background: var(--surface); }
-  @media (max-width: 960px) { .hero .wrap { grid-template-columns: 1fr; } .hero { padding-block: 48px 56px; } }
+  .bucket-row { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; background: var(--grey); border-radius: 12px; border: 2px solid var(--line-soft); }
+  .bucket-row.hot { border-color: var(--ink); background: var(--yellow); }
+  .bucket-ico { width: 34px; height: 34px; flex: none; border-radius: 9px; background: var(--white); border: 2px solid var(--ink); display: grid; place-items: center; }
+  .bucket-ico svg { width: 17px; height: 17px; }
+  .bucket-name { font: 700 15px/1.3 var(--body); }
+  .bucket-meta { font-size: 12.5px; color: var(--muted); }
+  .bucket-size { font: 800 14px/1 var(--display); }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
 
-  /* Console mock */
-  .console-holder { position: relative; }
-  .console { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; }
-  .console-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line-soft); }
-  .console-path { display: flex; align-items: center; gap: 8px; font: 400 13px/1 var(--mono); color: var(--muted); flex-wrap: wrap; }
-  .console-path b { color: var(--ink); font-weight: 500; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--ok-soft); color: #1E5A32; border-radius: 999px; font: 600 12px/1 var(--body); flex: none; }
-  .pill i { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
-  .console-tabs { display: flex; gap: 22px; padding: 0 20px; border-bottom: 1px solid var(--line-soft); font-size: 14px; font-weight: 500; color: var(--muted); overflow-x: auto; }
-  .console-tabs span { padding: 12px 0; white-space: nowrap; }
-  .console-tabs span.on { color: var(--ink); border-bottom: 2px solid var(--ink); }
-  .console-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 20px; }
-  .stat-tile { padding: 16px; background: var(--surface-soft); border-radius: 12px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-  .stat-tile .lbl { font-size: 12px; color: var(--muted); }
-  .stat-tile .val { font: 700 27px/1 var(--display); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-  .stat-tile .val small { font-size: 15px; color: var(--muted); font-weight: 500; }
-  .meter { height: 6px; background: var(--line-soft); border-radius: 3px; overflow: hidden; }
-  .meter i { display: block; height: 100%; background: var(--ink); border-radius: 3px; }
-  .console-section-label { padding: 0 20px 8px; font: 600 12px/1 var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-  .activity { display: flex; flex-direction: column; padding: 0 12px 16px; }
-  .arow { display: grid; grid-template-columns: 78px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 8px; font-size: 14px; border-bottom: 1px solid var(--line-soft); }
-  .arow:last-child { border-bottom: 0; }
-  .arow.hot { background: var(--surface-soft); border-radius: 10px; border-bottom: 0; }
-  .arow .hash { font: 400 12.5px/1 var(--mono); color: var(--muted); }
-  .arow .when { color: var(--muted); font-size: 13px; white-space: nowrap; }
-  .arow .tag { justify-self: end; padding: 3px 10px; border-radius: 999px; font: 600 12px/1 var(--body); white-space: nowrap; }
-  .arow .tag.new { background: var(--accent); color: var(--ink); }
-  .arow .tag.old { color: var(--muted); background: none; padding: 0; }
-  .toast {
-    position: absolute; left: -20px; bottom: -24px; display: flex; align-items: center; gap: 12px;
-    padding: 14px 18px; background: var(--ink); color: var(--bg); border-radius: 14px; box-shadow: var(--shadow-toast);
-    max-width: calc(100% + 40px);
+  /* Feature cards row */
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .feature-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+  .feature-ico {
+    width: 76px; height: 76px; border-radius: 20px; border: 2.5px solid var(--ink); display: grid; place-items: center;
+    box-shadow: var(--shadow-sm);
   }
-  .toast .ic { width: 28px; height: 28px; flex: none; border-radius: 8px; background: var(--accent); color: var(--ink); display: flex; align-items: center; justify-content: center; }
-  .toast .t1 { font-size: 14px; font-weight: 600; }
-  .toast .t2 { font: 400 12px/1 var(--mono); color: var(--dark-faint); }
-  @media (max-width: 640px) {
-    .console-stats { grid-template-columns: 1fr 1fr; }
-    .console-stats > :last-child { grid-column: 1 / -1; }
-    .arow { grid-template-columns: 60px minmax(0,1fr) auto; }
-    .arow .when { display: none; }
-    .toast { left: 12px; bottom: -20px; }
+  .feature-ico svg { width: 34px; height: 34px; }
+  .feature-card h3 { font-size: 23px; }
+  .feature-card p { font-size: 16.5px; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 860px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  /* Trust rows */
+  .trust-list { display: flex; flex-direction: column; gap: 16px; max-width: 780px; margin: 0 auto; }
+  .trust-row {
+    display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center;
+    border: 2.5px solid var(--ink); border-radius: 18px; padding: 20px 24px; background: var(--white);
   }
-
-  /* Section shell */
-  section.block { padding-block: 72px; }
-  section.block.bordered { border-top: 1px solid var(--line); }
-  section.block.dark { background: var(--dark-bg); color: var(--bg); }
-  .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 48px; }
-  .sec-head h2 { font-weight: 800; font-size: clamp(30px, 4.4vw, 56px); max-width: 720px; }
-  .sec-head .lede { max-width: 360px; font-size: 17px; line-height: 1.55; color: var(--ink-soft); }
-  section.block.dark .sec-head .lede { color: var(--dark-muted); }
-  .sec-head .eyebrow-wrap { display: flex; flex-direction: column; gap: 14px; }
-  @media (max-width: 800px) { .sec-head { flex-direction: column; align-items: flex-start; gap: 16px; } .sec-head .lede { max-width: none; } }
-
-  /* Product grid */
-  .pgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .pcard {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 30px;
-    display: flex; flex-direction: column; gap: 22px; min-width: 0;
-  }
-  .pcard.wide { grid-column: span 2; }
-  .pcard.dark { background: var(--dark-bg); color: var(--bg); border-color: var(--dark-bg); }
-  .pcard-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-  .pcard-top .txt { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-  .pcard h3 { font-size: 25px; font-weight: 700; letter-spacing: -.02em; }
-  .pcard p { font-size: 15.5px; color: var(--ink-soft); }
-  .pcard.dark p { color: var(--dark-muted); }
-  .pcard svg.ico { width: 38px; height: 38px; flex: none; }
-  .pcard > svg.ico { align-self: flex-start; }
-
-  .mini-table { border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; font-size: 14px; }
-  .mrow { display: grid; grid-template-columns: minmax(0,1.4fr) repeat(3, minmax(0,1fr)); gap: 12px; padding: 12px 16px; align-items: center; border-top: 1px solid var(--line-soft); }
-  .mrow:first-child { border-top: 0; background: var(--surface-soft); font: 600 12px/1 var(--body); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-  .mrow .id { font: 400 13px/1 var(--mono); color: var(--muted); }
-  .dot-row { display: flex; align-items: center; gap: 6px; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); flex: none; }
-  .dot.wait { background: #A8A49B; }
-  @media (max-width: 700px) {
-    .mrow { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); }
-    .mrow > span:nth-child(3) { display: none; }
-  }
-
-  .barfill { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-  .barfill-top { display: flex; justify-content: space-between; font-size: 13px; }
-  .barfill-track { display: flex; gap: 3px; height: 26px; }
-  .barfill-track > i { border-radius: 4px; }
-  .barfill-legend { display: flex; gap: 16px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-
-  .heat { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-  .heat-label { font-size: 12px; color: var(--muted); }
-  .heat-grid { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 4px; }
-  .heat-grid span { height: 22px; background: var(--ink); border-radius: 3px; }
-  .heat-grid span.pending { background: var(--accent); }
-  @media (max-width: 700px) { .heat-grid { grid-template-columns: repeat(7, minmax(0,1fr)); } .heat-grid span:nth-child(n+8) { display: none; } }
-
-  .net-diagram { margin-top: auto; width: 100%; height: auto; }
-
-  .logbox { margin-top: auto; display: flex; flex-direction: column; gap: 6px; padding: 14px; background: var(--dark-surface); border-radius: 10px; font: 400 12.5px/1.6 var(--mono); color: var(--dark-muted); overflow-x: auto; }
-  .logbox .ts { color: var(--dark-faint); }
-  .logbox .warn { color: var(--accent); }
-
-  @media (max-width: 900px) { .pgrid { grid-template-columns: repeat(2, minmax(0,1fr)); } .pcard.wide { grid-column: span 2; } }
-  @media (max-width: 640px) { .pgrid { grid-template-columns: 1fr; } .pcard.wide { grid-column: span 1; } }
-
-  /* Ablauf / steps */
-  .steps3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--dark-line); }
-  .step3 { display: flex; flex-direction: column; gap: 18px; padding: 32px 32px 0 0; border-left: 1px solid var(--dark-line); }
-  .step3:first-child { border-left: 0; padding-left: 0; }
-  .step3 .num { font: 800 52px/1 var(--display); color: var(--accent); letter-spacing: -.04em; }
-  .step3 h3 { font-size: 21px; font-weight: 600; }
-  .step3 p { font-size: 15.5px; line-height: 1.55; color: var(--dark-muted); }
-  .step3 .cmdline { padding: 14px 16px; background: var(--dark-surface); border-radius: 10px; font: 400 14px/1 var(--mono); }
-  .step3 .cmdline .p { color: var(--dark-faint); }
-  @media (max-width: 820px) { .steps3 { grid-template-columns: 1fr; border-top: 0; } .step3 { border-left: 0; border-top: 1px solid var(--dark-line); padding: 28px 0 0; } .step3:first-child { border-top: 0; } }
+  .trust-ico { width: 60px; height: 60px; border-radius: 16px; border: 2.5px solid var(--ink); background: var(--yellow); display: grid; place-items: center; flex: none; }
+  .trust-ico svg { width: 28px; height: 28px; }
+  .trust-row h3 { font-size: 20px; margin-bottom: 6px; }
+  .trust-row p { font-size: 16px; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 640px) { .trust-row { grid-template-columns: 1fr; text-align: left; } }
 
   /* Pricing */
-  .pricing3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
-  .plan3 { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 34px; display: flex; flex-direction: column; gap: 26px; position: relative; }
-  .plan3.hot { border: 2px solid var(--ink); padding: 33px; }
-  .plan3.enterprise { background: var(--chip); }
-  .plan3 .badge-pop { position: absolute; top: -14px; left: 32px; padding: 4px 12px; background: var(--accent); border-radius: 999px; font: 600 12px/1 var(--body); }
-  .plan3 h3 { font-size: 19px; font-weight: 600; }
-  .plan3 .sub { font-size: 14.5px; color: var(--muted); margin-top: 8px; }
-  .plan3 .price { display: flex; align-items: baseline; gap: 6px; }
-  .plan3 .price b { font: 800 48px/1 var(--display); letter-spacing: -.03em; }
-  .plan3 .price span { color: var(--muted); font-size: 14px; }
-  .plan3 ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
-  .plan3 .btn { margin-top: auto; justify-content: center; width: 100%; }
-  @media (max-width: 900px) { .pricing3 { grid-template-columns: 1fr; max-width: 460px; } }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+  .plan { position: relative; display: flex; flex-direction: column; gap: 22px; border: 2.5px solid var(--ink); border-radius: 20px; padding: 32px; background: var(--white); box-shadow: var(--shadow-sm); }
+  .plan.hot { background: var(--green); box-shadow: var(--shadow); }
+  .plan .badge { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: var(--green-accent); color: var(--white); font: 800 12px/1 var(--body); padding: 7px 14px; border-radius: 999px; white-space: nowrap; border: 2px solid var(--ink); }
+  .plan h3 { font-size: 24px; }
+  .plan .sub { font-size: 15px; color: var(--muted); margin-top: 6px; }
+  .plan .price { display: flex; align-items: baseline; gap: 6px; }
+  .plan .price b { font: 800 44px/1 var(--display); }
+  .plan .price span { font-size: 14px; color: var(--muted); }
+  .plan ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 15px; flex: 1; }
+  .plan li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; }
+  .plan li svg { width: 18px; height: 18px; color: var(--green-accent); margin-top: 2px; }
+  .plan .btn { justify-content: center; margin-top: auto; }
+  @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; } }
+
+  /* Audience cards */
+  .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .audience-card {
+    border: 2.5px solid var(--ink); border-radius: 20px; background: var(--white); padding: 28px;
+    display: flex; flex-direction: column; gap: 14px; transition: transform .15s ease, box-shadow .15s ease;
+    box-shadow: var(--shadow-sm);
+  }
+  .audience-card:hover { transform: translate(-2px, -4px); box-shadow: 0 12px 0 0 var(--ink); opacity: 1; }
+  .audience-ico { width: 58px; height: 58px; border-radius: 16px; border: 2.5px solid var(--ink); background: var(--flamingo); display: grid; place-items: center; }
+  .audience-ico svg { width: 26px; height: 26px; }
+  .audience-card h3 { font-size: 21px; }
+  .audience-card p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 860px) { .audience-grid { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; }
+  details.faq-item { border-bottom: 2px solid var(--line-soft); padding-block: 20px; }
+  details.faq-item:first-child { border-top: 2px solid var(--line-soft); }
+  summary.faq-summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; font: 700 18px/1.4 var(--body); }
+  summary.faq-summary::-webkit-details-marker { display: none; }
+  .faq-plus { width: 30px; height: 30px; border-radius: 50%; border: 2.5px solid var(--ink); display: grid; place-items: center; flex: none; transition: transform .2s ease; }
+  details[open] .faq-plus { transform: rotate(45deg); }
+  .faq-answer { margin-top: 14px; font-size: 16px; line-height: 1.6; color: var(--ink-soft); max-width: 65ch; }
 
   /* CTA */
-  .cta-wrap { padding-block: 0 72px; }
-  .cta-band {
-    background: var(--accent); border-radius: 28px; padding: clamp(40px, 6vw, 72px);
-    display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap;
-  }
-  .cta-band h2 { font-weight: 800; font-size: clamp(34px, 5.5vw, 72px); line-height: .96; max-width: 640px; color: var(--ink); }
-  .cta-side { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; max-width: 340px; }
-  .cta-side p { font-size: 17px; line-height: 1.5; color: var(--ink); }
+  .cta-box { text-align: center; max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .cta-box h2 { font-size: clamp(30px, 5vw, 46px); }
+  .cta-box p { font-size: 18px; color: var(--ink-soft); max-width: 42em; }
 
   /* Footer */
-  footer.foot { background: var(--dark-bg); color: var(--bg); padding: 64px 0 32px; }
-  .foot-grid { display: grid; grid-template-columns: minmax(0,1.8fr) repeat(4, minmax(0,1fr)); gap: 32px; }
-  .foot-brand p { margin-top: 14px; font-size: 14.5px; line-height: 1.55; color: var(--dark-muted); max-width: 280px; }
-  .foot-col { display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
-  .foot-col .h { font: 600 12.5px/1 var(--mono); color: var(--dark-faint); text-transform: uppercase; letter-spacing: .07em; }
-  .foot-col a { color: var(--bg); }
-  .foot-bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--dark-line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 14px; color: var(--dark-muted); }
+  footer.foot { background: var(--dark); color: var(--white); padding: 56px 0 30px; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 30px; }
+  .foot-brand p { margin-top: 14px; font-size: 14.5px; color: var(--dark-muted); max-width: 260px; line-height: 1.55; }
+  .foot-col h4 { font: 800 12.5px/1 var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--dark-faint); margin-bottom: 14px; }
+  .foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; font-size: 15px; }
+  .foot-col a { color: var(--white); }
+  .foot-bottom { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--dark-line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13.5px; color: var(--dark-muted); }
   .foot-bottom .status { display: flex; align-items: center; gap: 8px; }
-  .foot-bottom .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok-bright); }
-  @media (max-width: 820px) { .foot-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } .foot-brand { grid-column: 1 / -1; } }
+  .foot-bottom .status i { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; }
+  @media (max-width: 820px) { .foot-grid { grid-template-columns: repeat(2, 1fr); } .foot-brand { grid-column: 1 / -1; } }
 
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="i-check" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 8.5l3 3 7-7"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/></symbol>
-    <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5" y="5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M3 10.5V4a1 1 0 0 1 1-1h6.5"/></symbol>
-    <symbol id="i-copy-mini" viewBox="0 0 14 14"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2.5 7.5l3 3 6-7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 20 20"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 10.5l3.5 3.5L16 6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/></symbol>
+    <symbol id="i-bucket" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M5 4h14l-1.5 15a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8L5 4z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 4h16"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-euro" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M17 6.5A7 7 0 1 0 17 17.5M4 10.5h9M4 13.5h8"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="m11 3 9 9-8 8-9-9V4h7z"/><circle cx="8.3" cy="7.3" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="9.5" r="2.3" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3.5 19c.7-3.4 3-5 5.5-5s4.8 1.6 5.5 5M14.8 14.5c2 .2 3.6 1.6 4.2 4.5"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4.5 19c1-4 3.8-6 7.5-6s6.5 2 7.5 6"/></symbol>
   </defs>
 </svg>
 
-<div class="wrap" style="max-width:1312px">
-<header class="nav">
-  <div class="nav-left">
+<header class="nav-outer">
+  <nav class="nav">
     <a href="#top" class="brand" aria-label="AroLG Cloud Startseite">
-      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" fill="#16181A"/><path d="M9 20V13a4 4 0 0 1 4-4h8v7a4 4 0 0 1-4 4H9z" fill="#FF7A45"/></svg>
-      arolg<span class="dim">.cloud</span>
+      <svg class="brand-mark" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="#171717"/><path d="M10 23V15a5 5 0 0 1 5-5h9v8a5 5 0 0 1-5 5h-9z" fill="#FFE699"/></svg>
+      arolg.cloud
     </a>
-    <nav class="nav-links">
+    <div class="nav-links">
       <a href="#produkt">Produkt</a>
-      <a href="#ablauf">So funktioniert's</a>
       <a href="#preise">Preise</a>
-      <a href="#docs">Docs</a>
-    </nav>
-  </div>
-  <div class="nav-right">
-    <a href="#login" class="btn-text">Anmelden</a>
-    <a href="#start" class="btn btn-solid">Kostenlos starten</a>
-  </div>
+      <a href="#fuer-dich">Für dich</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#start" class="btn btn-line">Anmelden</a>
+      <a href="#start" class="btn btn-solid">Registrieren</a>
+    </div>
+  </nav>
 </header>
-</div>
 
-<header class="hero" id="top">
+<section class="hero" id="top">
   <div class="wrap">
-    <div class="hero-copy">
-      <span class="kicker"><i></i>Object Storage · einfach gemacht</span>
-      <h1>Deine Daten.<br>Ohne <mark>Umwege.</mark></h1>
-      <p class="hero-lede">S3-kompatible Buckets für Backups, Medien und Data Lakes, verwaltet in einer ruhigen Konsole. Starte in Sekunden, skaliere ohne Ticket – und zahle nur, was wirklich belegt ist.</p>
+    <div class="hero-inner">
+      <span class="kicker">☁ DSGVO-konform · aus Deutschland</span>
+      <h1>Deine Daten verdienen ein <em>europäisches</em> Zuhause.</h1>
+      <p class="hero-lede">S3-kompatibler Object Storage für Backups, Medien und Anwendungsdaten. Ohne US-Cloud, ohne versteckte Kosten. Ab 0 €.</p>
       <div class="hero-actions">
-        <a href="#start" class="btn btn-solid">Bucket erstellen <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a href="#docs" class="btn btn-line">Dokumentation</a>
-      </div>
-      <div class="cmd">
-        <span class="p">$</span>
-        <span>arolg bucket create backups</span>
-        <button type="button" id="copyCmd" aria-label="Befehl kopieren"><svg aria-hidden="true"><use href="#i-copy"/></svg></button>
-      </div>
-    </div>
-
-    <div class="console-holder">
-      <div class="console" role="img" aria-label="Konsolen-Ansicht des Buckets media-assets mit Auslastung und letzter Aktivität">
-        <div class="console-top">
-          <div class="console-path"><span>produktion</span><span>/</span><b>media-assets</b></div>
-          <span class="pill"><i></i>Aktiv</span>
-        </div>
-        <div class="console-tabs">
-          <span class="on">Übersicht</span><span>Objekte</span><span>Zugriffsschlüssel</span><span>Einstellungen</span>
-        </div>
-        <div class="console-stats">
-          <div class="stat-tile">
-            <span class="lbl">Speicher</span>
-            <span class="val">642 <small>/ 1000 GB</small></span>
-            <div class="meter"><i style="width:64%"></i></div>
-          </div>
-          <div class="stat-tile">
-            <span class="lbl">Objekte</span>
-            <span class="val">128<small>k</small></span>
-            <div class="meter"><i style="width:38%"></i></div>
-          </div>
-          <div class="stat-tile">
-            <span class="lbl">Anfragen / s</span>
-            <span class="val">1,2<small>k</small></span>
-            <svg width="100%" height="22" viewBox="0 0 120 22" preserveAspectRatio="none" fill="none" aria-hidden="true"><polyline points="0,16 12,14 24,17 36,10 48,12 60,7 72,11 84,5 96,8 108,3 120,6" stroke="#16181A" stroke-width="1.6"/></svg>
-          </div>
-        </div>
-        <div class="console-section-label">Letzte Aktivität</div>
-        <div class="activity">
-          <div class="arow hot">
-            <span class="id hash">a3f9c1e</span><span>Checkout-Assets hochgeladen</span><span class="when">vor 2 Min</span><span class="tag new">Neu</span>
-          </div>
-          <div class="arow"><span class="id hash">7b21d0f</span><span>Lifecycle-Regel aktualisiert</span><span class="when">vor 3 Std</span><span class="tag old">Erledigt</span></div>
-          <div class="arow"><span class="id hash">e90aa2f</span><span>Versionierung aktiviert</span><span class="when">gestern</span><span class="tag old">Erledigt</span></div>
-          <div class="arow"><span class="id hash">1c4e8b2</span><span>Bucket angelegt</span><span class="when">Mo.</span><span class="tag old">Erledigt</span></div>
-        </div>
-      </div>
-      <div class="toast">
-        <span class="ic"><svg aria-hidden="true"><use href="#i-copy-mini"/></svg></span>
-        <div><div class="t1">Upload abgeschlossen</div><div class="t2 mono">media-assets · 14 s</div></div>
+        <a href="#start" class="btn btn-solid">Kostenlos starten <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#produkt" class="btn btn-line">So funktioniert's</a>
       </div>
     </div>
   </div>
-</header>
+</section>
 
-<section class="block bordered" id="produkt">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow-wrap">
-        <span class="eyebrow">01 — Produkt</span>
-        <h2>Alles, was dein Storage braucht. Nichts, was er nicht braucht.</h2>
-      </div>
-      <p class="lede">Bausteine, die zusammenpassen – verwaltet über eine Konsole, eine CLI und die S3-API.</p>
+<section class="block bg-grey bordered" id="produkt">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Das Problem</span>
+      <h2>Zu viele Cloud-Rechnungen, kein Überblick.</h2>
+      <p>Backups bei einem Anbieter, Medien bei einem anderen, Server-Snapshots irgendwo dazwischen. Jede Rechnung in einer anderen Sprache, jeder Support-Kontakt in einer anderen Zeitzone.</p>
+      <h3>AroLG Cloud bringt es zusammen.</h3>
+      <p>Ein Object-Storage-Konto für alles, was du speichern musst. Eine Rechnung, ein Preis pro Terabyte, ein Ansprechpartner in Deutschland.</p>
     </div>
+    <div class="split-visual" role="img" aria-label="Übersicht dreier Buckets: media-assets, produktion-backups und app-logs">
+      <div class="bucket-row hot">
+        <span class="bucket-ico"><svg aria-hidden="true"><use href="#i-bucket"/></svg></span>
+        <span><span class="bucket-name">media-assets</span><br><span class="bucket-meta">Region fra1 · Aktiv</span></span>
+        <span class="bucket-size">642 GB</span>
+      </div>
+      <div class="bucket-row">
+        <span class="bucket-ico"><svg aria-hidden="true"><use href="#i-bucket"/></svg></span>
+        <span><span class="bucket-name">produktion-backups</span><br><span class="bucket-meta">Region fra1 · Versioniert</span></span>
+        <span class="bucket-size">2,1 TB</span>
+      </div>
+      <div class="bucket-row">
+        <span class="bucket-ico"><svg aria-hidden="true"><use href="#i-bucket"/></svg></span>
+        <span><span class="bucket-name">app-logs</span><br><span class="bucket-meta">Region nue1 · Repliziert</span></span>
+        <span class="bucket-size">88 GB</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="pgrid">
-      <div class="pcard wide">
-        <div class="pcard-top">
-          <div class="txt">
-            <h3>Buckets</h3>
-            <p>Objekte in Sekunden bereit – mit Versionierung, Lifecycle-Regeln oder Replikation dazugeschaltet.</p>
-          </div>
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#16181A" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>
-        </div>
-        <div class="mini-table">
-          <div class="mrow"><span>Bucket</span><span>Größe</span><span>Region</span><span>Status</span></div>
-          <div class="mrow"><span class="id">media-assets</span><span>642 GB</span><span>fra1</span><span class="dot-row"><span class="dot"></span>Aktiv</span></div>
-          <div class="mrow"><span class="id">produktion-backups</span><span>2,1 TB</span><span>fra1</span><span class="dot-row"><span class="dot"></span>Aktiv</span></div>
-          <div class="mrow"><span class="id">app-logs</span><span>88 GB</span><span>nue1</span><span class="dot-row" style="color:var(--muted)"><span class="dot wait"></span>Repliziert …</span></div>
+<section class="block">
+  <div class="wrap">
+    <div class="center-head">
+      <span class="eyebrow">Alles in einer Plattform</span>
+      <h2>Ein Konto für deinen ganzen Speicher</h2>
+      <p>Kein Wechseln zwischen Anbietern, keine verlorenen Zugangsdaten. Ein Zuhause für alles, was du sichern willst.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-ico" style="background:var(--yellow)"><svg aria-hidden="true"><use href="#i-bucket"/></svg></span>
+        <h3>Object Storage</h3>
+        <p>S3-kompatible Buckets für Dateien, Backups und Assets — funktioniert mit deinen bestehenden Tools.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-ico" style="background:var(--blue)"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
+        <h3>Object Lock</h3>
+        <p>Unveränderbare Backups schützen vor Ransomware. WORM im Governance- oder Compliance-Modus.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-ico" style="background:var(--flamingo)"><svg aria-hidden="true"><use href="#i-clock"/></svg></span>
+        <h3>Versionierung</h3>
+        <p>Jede Änderung bleibt abrufbar. Stelle jede frühere Version eines Objekts mit einem Klick wieder her.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block bg-blue bordered">
+  <div class="wrap">
+    <div class="center-head">
+      <span class="eyebrow">Einfach fair</span>
+      <h2>Einfach europäisch.</h2>
+      <p>Wo deine Daten liegen, sollte sich gut anfühlen — nicht nach Kompromissen.</p>
+    </div>
+    <div class="trust-list">
+      <div class="trust-row">
+        <span class="trust-ico"><svg aria-hidden="true"><use href="#i-euro"/></svg></span>
+        <div>
+          <h3>Deine Daten bleiben hier</h3>
+          <p>Wir hosten ausschließlich in deutschen Rechenzentren — keine US-Cloud, kein CLOUD Act, kein stiller Datenabfluss. DSGVO-konform von Anfang an.</p>
         </div>
       </div>
-
-      <div class="pcard">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#16181A" stroke-width="1.5" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <div class="trust-row">
+        <span class="trust-ico"><svg aria-hidden="true"><use href="#i-tag"/></svg></span>
         <div>
-          <h3>Verschlüsselung</h3>
-          <p>AES-256 im Ruhezustand, TLS 1.3 unterwegs. Auf Wunsch mit eigenem Schlüssel.</p>
-        </div>
-        <div class="barfill">
-          <div class="barfill-top"><span class="id mono">media-assets</span><span style="color:var(--muted)">SSE-S3</span></div>
-          <div class="barfill-track">
-            <i style="flex-grow:5;background:#16181A"></i>
-            <i style="flex-grow:2;background:#FF7A45"></i>
-            <i style="flex-grow:3;background:#E4E1D9"></i>
-          </div>
-          <div class="barfill-legend"><span>SSE-S3</span><span>SSE-KMS</span><span>Unverschlüsselt</span></div>
+          <h3>Preise ohne Tricks</h3>
+          <p>Ein Preis pro Terabyte, stundengenau abgerechnet. Kein künstlicher Jahresrabatt, kein Lock-in — du kannst jederzeit gehen und jederzeit wiederkommen.</p>
         </div>
       </div>
-
-      <div class="pcard">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#16181A" stroke-width="1.5" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+      <div class="trust-row">
+        <span class="trust-ico"><svg aria-hidden="true"><use href="#i-lock"/></svg></span>
         <div>
-          <h3>Object Lock</h3>
-          <p>Unveränderbare Backups schützen vor Ransomware. WORM im Governance- oder Compliance-Modus.</p>
-        </div>
-        <div class="heat">
-          <span class="heat-label">Aufbewahrung · letzte 14 Tage</span>
-          <div class="heat-grid">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span><span></span><span class="pending"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pcard">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#16181A" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5L6.5 17M12 11.5l5.5 5.5"/></svg>
-        <div>
-          <h3>Regionen</h3>
-          <p>Zwei Standorte in Deutschland, per Klick repliziert.</p>
-        </div>
-        <svg class="net-diagram" viewBox="0 0 300 84" fill="none" aria-hidden="true">
-          <path d="M40 42H150M150 42L260 14M150 42L260 70" stroke="#D6D2C8" stroke-width="1.5" stroke-dasharray="4 4"/>
-          <rect x="8" y="26" width="64" height="32" rx="8" fill="#16181A"/>
-          <text x="40" y="46" text-anchor="middle" fill="#F3F1EC" font-family="IBM Plex Mono, monospace" font-size="11">fra1</text>
-          <circle cx="150" cy="42" r="10" fill="#FF7A45"/>
-          <rect x="228" y="2" width="64" height="26" rx="7" fill="#F7F6F2" stroke="#D6D2C8"/>
-          <text x="260" y="19" text-anchor="middle" fill="#16181A" font-family="IBM Plex Mono, monospace" font-size="11">fra2</text>
-          <rect x="228" y="56" width="64" height="26" rx="7" fill="#F7F6F2" stroke="#D6D2C8"/>
-          <text x="260" y="73" text-anchor="middle" fill="#16181A" font-family="IBM Plex Mono, monospace" font-size="11">nue1</text>
-        </svg>
-      </div>
-
-      <div class="pcard dark">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#FF7A45" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>
-        <div>
-          <h3>Logs &amp; Monitoring</h3>
-          <p>Live-Zugriffe und Metriken, ohne Extra-Tool.</p>
-        </div>
-        <div class="logbox">
-          <span><span class="ts">12:04:11</span> GET /media-assets/hero.jpg 200 · 18ms</span>
-          <span><span class="ts">12:04:11</span> PUT /produktion-backups/db.tar 200 · 9ms</span>
-          <span><span class="ts">12:04:12</span> <span class="warn">WARN</span> replikation queue › 2</span>
-          <span><span class="ts">12:04:12</span> GET /app-logs/2026-09.log 200 · 42ms</span>
+          <h3>Verschlüsselung inklusive</h3>
+          <p>AES-256 im Ruhezustand, TLS 1.3 unterwegs — bei jedem Tarif, ohne Aufpreis. Eigener Schlüssel über SSE-KMS möglich.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="block dark" id="ablauf">
+<section class="block" id="preise">
   <div class="wrap">
-    <div class="sec-head" style="margin-bottom:56px">
-      <div class="eyebrow-wrap">
-        <span class="eyebrow on-dark">02 — So funktioniert's</span>
-        <h2 style="color:var(--bg);max-width:820px">Von der Datei zum verteilten Bucket in drei Schritten.</h2>
-      </div>
+    <div class="center-head">
+      <span class="eyebrow">Preise</span>
+      <h2>Preise, die man versteht.</h2>
+      <p>Fair, dauerhaft und ohne versteckte Kosten. Starte kostenlos und wechsle, wenn du mehr brauchst.</p>
     </div>
-    <div class="steps3">
-      <div class="step3">
-        <span class="num">01</span>
-        <h3>Bucket anlegen</h3>
-        <p>Region wählen, Zugriffsschlüssel erzeugen. Staging und Produktion sind sofort getrennt.</p>
-        <div class="cmdline"><span class="p">$ </span>arolg bucket create backups --region fra1</div>
-      </div>
-      <div class="step3">
-        <span class="num">02</span>
-        <h3>Hochladen</h3>
-        <p>Per S3-API, AWS-CLI oder rclone. Jeder Upload landet sofort verteilt und redundant.</p>
-        <div class="cmdline"><span class="p">$ </span>aws s3 cp ./dump.tar s3://backups/</div>
-      </div>
-      <div class="step3">
-        <span class="num">03</span>
-        <h3>Verteilen</h3>
-        <p>Mehr Kapazität, mehr Regionen, Replikation dazu – ohne Migration und ohne Downtime.</p>
-        <div class="cmdline"><span class="p">$ </span>arolg bucket replicate backups --to nue1</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block bordered" id="preise">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow-wrap">
-        <span class="eyebrow">03 — Preise</span>
-        <h2>Preise, die man versteht.</h2>
-      </div>
-      <p class="lede">Stundengenaue Abrechnung. Keine Einrichtungsgebühr, jederzeit kündbar.</p>
-    </div>
-    <div class="pricing3">
-      <div class="plan3">
-        <div><h3>Free</h3><p class="sub">Zum Ausprobieren und für kleine Projekte.</p></div>
-        <div class="price"><b>0 €</b><span>/ Monat</span></div>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div><h3>Free</h3><p class="sub">Perfekt zum Ausprobieren.</p></div>
+        <div class="price"><b>0 €</b><span>/ für immer</span></div>
         <ul>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>10 GB Speicher</li>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>50 GB Egress / Monat</li>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>3 Buckets</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>10 GB Speicher</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>50 GB Egress / Monat</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>3 Buckets</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Klickstatistiken</li>
         </ul>
-        <a href="#start" class="btn btn-line">Free wählen</a>
+        <a href="#start" class="btn btn-line">Kostenlos starten</a>
       </div>
-      <div class="plan3 hot">
-        <span class="badge-pop">Beliebt</span>
+      <div class="plan hot">
+        <span class="badge">Beliebteste Wahl</span>
         <div><h3>Standard</h3><p class="sub">Für Backups, Apps und Medien im Betrieb.</p></div>
         <div class="price"><b>5,99 €</b><span>/ TB / Monat</span></div>
         <ul>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>Unbegrenzte Buckets</li>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>Egress bis zur Speichermenge inklusive</li>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>Object Lock &amp; Versionierung</li>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>E-Mail-Support, Antwort in 4 h</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Unbegrenzte Buckets</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Egress bis zur Speichermenge inklusive</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Object Lock &amp; Versionierung</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>E-Mail-Support, Antwort in 4 h</li>
         </ul>
-        <a href="#start" class="btn btn-solid">Standard wählen</a>
+        <a href="#start" class="btn btn-green">Jetzt starten</a>
       </div>
-      <div class="plan3 enterprise">
-        <div><h3>Enterprise</h3><p class="sub">Für Compliance- und SLA-Anforderungen.</p></div>
-        <div class="price"><b>Individuell</b></div>
+      <div class="plan">
+        <div><h3>Enterprise</h3><p class="sub">Für Teams mit Compliance-Anforderungen.</p></div>
+        <div class="price"><b>Auf Anfrage</b></div>
         <ul>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>Dedizierte Hardware</li>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>Cross-Region-Replikation</li>
-          <li class="check"><svg aria-hidden="true"><use href="#i-check"/></svg>AV-Vertrag &amp; feste SLA</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Dedizierte Hardware</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Cross-Region-Replikation</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>AV-Vertrag &amp; feste SLA</li>
         </ul>
         <a href="#kontakt" class="btn btn-line">Kontakt aufnehmen</a>
       </div>
@@ -524,14 +389,70 @@
   </div>
 </section>
 
-<section class="cta-wrap" id="kontakt">
+<section class="block bg-grey bordered" id="fuer-dich">
   <div class="wrap">
-    <div class="cta-band">
-      <h2>Bereit, wenn du es bist.</h2>
-      <div class="cta-side">
-        <p>Konto anlegen, ersten Bucket erstellen – in weniger Zeit, als dieser Satz braucht.</p>
-        <a href="#start" class="btn btn-solid">Kostenlos starten <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <div class="center-head">
+      <span class="eyebrow">Für dich gemacht</span>
+      <h2>Egal wie du speicherst.</h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <span class="audience-ico"><svg aria-hidden="true"><use href="#i-code"/></svg></span>
+        <h3>Entwickler</h3>
+        <p>S3-API, CLI und ein einfaches Dashboard. Wechsle den Endpoint, der Rest bleibt gleich.</p>
       </div>
+      <div class="audience-card">
+        <span class="audience-ico"><svg aria-hidden="true"><use href="#i-team"/></svg></span>
+        <h3>Unternehmen</h3>
+        <p>Backups, Rechnungswesen und Compliance an einem Ort — mit AV-Vertrag direkt in der Konsole.</p>
+      </div>
+      <div class="audience-card">
+        <span class="audience-ico"><svg aria-hidden="true"><use href="#i-person"/></svg></span>
+        <h3>Freelancer</h3>
+        <p>Sichere deine Projekte und Kundendaten, ohne dich um Infrastruktur zu kümmern.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="center-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Häufige Fragen</h2>
+      <p>Was uns Menschen am häufigsten fragen — hier in kurz.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary class="faq-summary">Muss ich meine Anwendung umbauen?<span class="faq-plus" aria-hidden="true">+</span></summary>
+        <p class="faq-answer">Nein. AroLG Cloud spricht die S3-API. Du änderst Endpoint und Zugangsdaten, alle übrigen Aufrufe bleiben gleich.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Wo stehen die Server?<span class="faq-plus" aria-hidden="true">+</span></summary>
+        <p class="faq-answer">Ausschließlich in Deutschland, derzeit in Frankfurt und Nürnberg. Die Region wählst du beim Anlegen eines Buckets.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Wie migriere ich bestehende Daten?<span class="faq-plus" aria-hidden="true">+</span></summary>
+        <p class="faq-answer">Mit rclone oder <code>aws s3 sync</code> kopierst du Buckets direkt von anderen Anbietern. Ab 10 TB unterstützt unser Team die Migration kostenlos.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Gibt es einen Auftragsverarbeitungsvertrag?<span class="faq-plus" aria-hidden="true">+</span></summary>
+        <p class="faq-answer">Ja. Den AV-Vertrag nach Art. 28 DSGVO schließt du direkt in der Konsole digital ab.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Was passiert, wenn eine Festplatte ausfällt?<span class="faq-plus" aria-hidden="true">+</span></summary>
+        <p class="faq-answer">Jedes Objekt wird per Erasure Coding auf 16 Datenträger verteilt. Fallen bis zu vier aus, bleiben die Daten lesbar, und die Redundanz stellt sich automatisch wieder her.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="block bg-yellow bordered" id="kontakt">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Zeit zu migrieren.</h2>
+      <p>Kostenlos, in unter 60 Sekunden und ohne Kreditkarte. Bleib so lange du willst.</p>
+      <a href="#start" class="btn btn-solid">Kostenlos starten <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -540,13 +461,13 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <span class="brand" style="font-size:26px">arolg<span class="dim" style="color:var(--dark-faint)">.cloud</span></span>
-        <p>Storage, das aus dem Weg geht.</p>
+        <span class="brand" style="font-size:22px">arolg.cloud</span>
+        <p>Dein Zuhause für Object Storage. Einfach, sicher und europäisch.</p>
       </div>
-      <div class="foot-col"><span class="h">Produkt</span><a href="#produkt">Buckets</a><a href="#produkt">Verschlüsselung</a><a href="#produkt">Object Lock</a><a href="#produkt">Regionen</a></div>
-      <div class="foot-col"><span class="h">Ressourcen</span><a href="#docs">Docs</a><a href="#docs">API</a><a href="#docs">Changelog</a><a href="#docs">Status</a></div>
-      <div class="foot-col"><span class="h">Unternehmen</span><a href="#kontakt">Über uns</a><a href="#kontakt">Kontakt</a><a href="#kontakt">Jobs</a></div>
-      <div class="foot-col"><span class="h">Rechtliches</span><a href="#kontakt">Impressum</a><a href="#kontakt">Datenschutz</a><a href="#kontakt">AGB</a></div>
+      <div class="foot-col"><h4>Produkt</h4><ul><li><a href="#produkt">Object Storage</a></li><li><a href="#produkt">Object Lock</a></li><li><a href="#preise">Preise</a></li></ul></div>
+      <div class="foot-col"><h4>Für dich</h4><ul><li><a href="#fuer-dich">Entwickler</a></li><li><a href="#fuer-dich">Unternehmen</a></li><li><a href="#fuer-dich">Freelancer</a></li></ul></div>
+      <div class="foot-col"><h4>Wer wir sind</h4><ul><li><a href="#kontakt">Über uns</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
+      <div class="foot-col"><h4>Rechtliches</h4><ul><li><a href="#kontakt">Impressum</a></li><li><a href="#kontakt">Datenschutz</a></li><li><a href="#kontakt">AGB</a></li></ul></div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 arolg.cloud</span>
@@ -554,26 +475,5 @@
     </div>
   </div>
 </footer>
-
-<script>
-(function () {
-  function selectFallback(el) {
-    try {
-      var r = document.createRange(); r.selectNodeContents(el);
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-    } catch (e) {}
-  }
-  var copyBtn = document.getElementById("copyCmd");
-  if (copyBtn) {
-    copyBtn.addEventListener("click", function () {
-      var text = "arolg bucket create backups";
-      var cmdText = copyBtn.previousElementSibling;
-      function ok() { copyBtn.innerHTML = '<svg aria-hidden="true"><use href="#i-check"/></svg>'; setTimeout(function () { copyBtn.innerHTML = '<svg aria-hidden="true"><use href="#i-copy"/></svg>'; }, 1400); }
-      try { navigator.clipboard.writeText(text).then(ok, function () { selectFallback(cmdText); }); }
-      catch (e) { selectFallback(cmdText); }
-    });
-  }
-})();
-</script>
 </body>
 </html>
