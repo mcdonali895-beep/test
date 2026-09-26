@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Watch Together</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="join-screen" class="screen">
+    <div class="card">
+      <h1>🎬 Watch Together</h1>
+      <p>Schau YouTube-Videos synchron mit deinen Freunden.</p>
+      <input id="name-input" type="text" placeholder="Dein Name" maxlength="24" />
+      <input id="room-input" type="text" placeholder="Raum-Code (z. B. abends-kino)" maxlength="32" />
+      <button id="join-btn">Raum beitreten</button>
+      <button id="create-btn" class="secondary">Neuen Raum erstellen</button>
+    </div>
+  </div>
+
+  <div id="room-screen" class="screen hidden">
+    <header>
+      <div class="room-info">
+        <span id="room-title"></span>
+        <button id="copy-link-btn" title="Link kopieren">🔗 Link kopieren</button>
+      </div>
+      <div id="user-list"></div>
+    </header>
+
+    <main>
+      <div class="video-area">
+        <form id="video-form">
+          <input id="video-input" type="text" placeholder="YouTube-Link oder Video-ID einfügen" />
+          <button type="submit">Laden</button>
+        </form>
+        <div id="player-wrap">
+          <div id="player"></div>
+          <div id="player-placeholder">Füge oben einen YouTube-Link ein, um zu starten.</div>
+        </div>
+      </div>
+
+      <aside class="chat-area">
+        <div id="chat-messages"></div>
+        <form id="chat-form">
+          <input id="chat-input" type="text" placeholder="Nachricht schreiben…" maxlength="300" autocomplete="off" />
+          <button type="submit">Senden</button>
+        </form>
+      </aside>
+    </main>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
