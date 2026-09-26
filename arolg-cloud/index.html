@@ -62,7 +62,7 @@
   .btn svg { width: 17px; height: 17px; flex: none; }
 
   /* NAV */
-  header.nav-outer { position: relative; z-index: 30; padding: 20px 20px 0; }
+  header.nav-outer { position: relative; z-index: 30; padding: 20px 20px 0; background: var(--yellow); }
   .nav {
     max-width: 1180px; margin: 0 auto; background: var(--white); border: 2.5px solid var(--ink);
     border-radius: 20px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 32px;
@@ -79,7 +79,7 @@
   @media (max-width: 480px) { .nav-cta .btn-line { display: none; } .nav { padding: 12px 16px; } }
 
   /* HERO */
-  section.hero { background: var(--yellow); border-bottom: 2.5px solid var(--ink); padding-block: 56px 0; overflow: hidden; }
+  section.hero { background: var(--yellow); padding-block: 56px 0; overflow: hidden; }
   .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
   .hero-inner { max-width: 620px; padding-bottom: 64px; }
   .kicker { display: inline-flex; align-items: center; gap: 8px; font: 700 13px/1 var(--body); text-transform: uppercase; letter-spacing: .06em; background: var(--white); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px 8px 12px; }
@@ -108,7 +108,6 @@
 
   /* Section shells */
   section.block { padding-block: 68px; }
-  section.block.bordered { border-top: 2.5px solid var(--ink); }
   .bg-grey { background: var(--grey); }
   .bg-blue { background: var(--blue); }
   .bg-green { background: var(--green); }
@@ -331,7 +330,7 @@
   </div>
 </section>
 
-<section class="block bg-grey bordered" id="produkt">
+<section class="block bg-grey" id="produkt">
   <div class="wrap split">
     <div>
       <span class="eyebrow">Das Problem</span>
@@ -385,7 +384,7 @@
   </div>
 </section>
 
-<section class="block bg-blue bordered">
+<section class="block bg-blue">
   <div class="wrap">
     <div class="center-head">
       <span class="eyebrow">Einfach fair</span>
@@ -469,7 +468,7 @@
   </div>
 </section>
 
-<section class="block bg-grey bordered" id="fuer-dich">
+<section class="block bg-grey" id="fuer-dich">
   <div class="wrap">
     <div class="center-head">
       <span class="eyebrow">Für dich gemacht</span>
@@ -527,7 +526,7 @@
   </div>
 </section>
 
-<section class="block bg-yellow bordered" id="kontakt">
+<section class="block bg-yellow" id="kontakt">
   <div class="wrap">
     <div class="cta-box">
       <h2>Zeit zu migrieren.</h2>
